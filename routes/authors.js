@@ -13,7 +13,7 @@ router.post('/add',(req, res)=>{
         name:name
     });
     newAuthor.save()
-        .then(()=>res.json('Author added!'))
+        .then(()=>res.json('Author added! || '+ newAuthor.id))
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 

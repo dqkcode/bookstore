@@ -7,7 +7,7 @@ let Author= require('../models/author.model');
 let Publisher= require('../models/publisher.model');
 
 const uploadPath = path.join('client/public', Book.coverImageBasePath)
-const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/gif']
+const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
@@ -20,25 +20,7 @@ router.get('/', (req,res)=>{
         .then((books=>res.json(books)))
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
-router.post('/update/:id', upload.single('coverImage'),(req, res)=>{
-    const fileName = req.file != null ? req.file.filename : null;
-    Book.findById(req.params.id)
-        .then((book)=>{
-            console.log(book);
-            book.title=req.body.title;
-            book.description=req.body.description;
-            book.publishDate=new Date(req.body.publishDate);
-            book.pageCount=req.body.pageCount;
-            book.coverImage= fileName;
-            book.author=req.body.author;
-            book.publisher=req.body.publisher;
-            book.discount=req.body.discount;
-            book.save()
-                .then(()=>res.json('Book updated!'))
-                .catch((err)=>res.status(400).json('Error: '+err));        
-      });
-    
-});
+
 router.post('/add',upload.single('coverImage'),(req, res)=>{
     const fileName = req.file != null ? req.file.filename : null;
     console.log(res.body);
@@ -53,7 +35,7 @@ router.post('/add',upload.single('coverImage'),(req, res)=>{
         discount:req.body.discount
       });
     newBook.save()
-        .then(()=>res.json('Book added!'))
+        .then(()=>res.json('Book added! || '+ newBook.id))
         .catch((err)=>res.status(400).json('Error: '+err));
 });
 
@@ -63,8 +45,43 @@ router.get('/:id', (req,res)=>{
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 
+router.post('/update/:id', upload.single('coverImage'),(req, res)=>{
+    const fileName = req.file != null ? req.file.filename : null;
+    Book.findById(req.params.id)
+        .then((book)=>{
+            let bookImageName=book.coverImage;
+            if(bookImageName!=null){
+                fs.unlink(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
+                    if (err) throw err;
+                    console.log(`successfully deleted cover image`);
+            });
+            }        
+            book.title=req.body.title;
+            book.description=req.body.description;
+            book.publishDate=new Date(req.body.publishDate);
+            book.pageCount=req.body.pageCount;
+            book.coverImage= fileName;
+            book.author=req.body.author;
+            book.publisher=req.body.publisher;
+            book.discount=req.body.discount;
+            book.save()
+                .then(()=>res.json('Book updated! || '+ book.id))
+                .catch((err)=>res.status(400).json('Error: '+err));        
+      });
+    
+});
+
 router.delete('/:id',(req,res)=>{
-    const bookImageName = Book.findById(req.params.id).coverImage;
+    Book.findById(req.params.id)
+    .then(rbook => {
+        let bookImageName=rbook.coverImage;
+        if(bookImageName!=null){
+            fs.unlink(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
+                if (err) throw err;
+                console.log(`successfully deleted cover image`);
+            });
+        }        
+    })
     Book.findByIdAndDelete(req.params.id)
         .then(()=>res.json('Book deleted!'))
         .catch((err)=>res.status(400).json('Error: '+err ));

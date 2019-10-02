@@ -19,14 +19,15 @@ router.post('/add',(req, res)=>{
                 userName, 
                 password, 
                 name, 
-                email
+                email,
+                role:['customer'],
             });
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                   if (err) throw err;
                   newUser.password = hash;
                   newUser.save()
-                  .then(()=>res.json('User added!'))
+                  .then(()=>res.json('User added!'+newUser))
                   .catch((err)=>res.status(400).json('Error: '+err ));
                 });
             });
@@ -64,5 +65,25 @@ router.delete('/:id',(req,res)=>{
         .then(()=>res.json('User deleted!'))
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
+
+function Logout(req, res){
+    if (req.session) {
+        req.session.destroy(function(err) {
+            if(err) {
+                return res.json({err});
+            } else {
+                return res.json({'logout': "Success"});
+            }
+        });
+    }
+}
+
+function requiresLogin(req, res, next) {
+    if (req.session && req.session.user) {
+        return next();
+    } else {
+        return res.json({err: 'You must be logged in to view this page.'});
+    }
+}
 
 module.exports=router;

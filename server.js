@@ -1,19 +1,22 @@
 const express= require('express');
 const cors= require('cors');
 const mongoose= require('mongoose');
-const bodyParser=require('body-parser')
+const session = require('express-session');
+const dotenv= require('dotenv');
+
 const authorRouter=require('./routes/authors');
 const bookRouter=require('./routes/books');
 const publisherRouter=require('./routes/publishers');
 const userRouter= require('./routes/users');
-require('dotenv').config();
 
+dotenv.config();
 const app= express();
+const connection = mongoose.connection;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('client/public'))
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
+app.use(express.static('client/public'));
+app.use(express.urlencoded({ limit: '10mb', extended: false }));
 
 app.use('/authors',authorRouter);
 app.use('/publishers',publisherRouter);
@@ -23,7 +26,6 @@ app.use('/books',bookRouter);
 
 const uri= process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology: true});
-const connection = mongoose.connection;
 connection.once('open',()=>{
     console.log('MongoDB database connection established');
 });
