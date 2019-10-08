@@ -13,7 +13,7 @@ router.post('/add',(req, res)=>{
         name:name
     });
     newPublisher.save()
-        .then(()=>res.json('Publisher added!'))
+        .then(()=>res.json('Publisher added! ||'+newPublisher.id))
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 
@@ -28,7 +28,7 @@ router.post('/update/:id',(req,res)=>{
         .then((publisher)=>{
             publisher.name=req.body.name;
             publisher.save()
-            .then(()=>res.json('Publisher updated!'))
+            .then(()=>res.json('Publisher updated!  ||'+publisher.id))
             .catch((err)=>res.status(400).json('Error: '+err ));
         })
         .catch((err)=>res.status(400).json('Error: '+err ));

@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
+const jwt =require('jsonwebtoken');
+const {registerValidation, loginValidation}= require('../config/validation');
 let User= require('../models/user.model');
 
 router.get('/', (req,res)=>{
@@ -8,32 +10,53 @@ router.get('/', (req,res)=>{
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 
-router.post('/add',(req, res)=>{
-    const {userName, password, name, email } = req.body;
-    User.findOne({userName:userName}).then((user)=>{
-        if(user){
-            res.status(400).json('Error: UserName already exists' );
-        }
-        else{
-            const newUser= new User({
-                userName, 
-                password, 
-                name, 
-                email,
-                role:['customer'],
-            });
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                  if (err) throw err;
-                  newUser.password = hash;
-                  newUser.save()
-                  .then(()=>res.json('User added!'+newUser))
-                  .catch((err)=>res.status(400).json('Error: '+err ));
-                });
-            });
-        }
-    }).catch((err)=>res.status(400).json('Error: '+err ));
+router.post('/register', async (req, res)=>{
+    //Validate
+    const { error } = registerValidation(req.body);
+    if (error){
+        return res.status(400).json(error.details[0].message);
+    }
+    //Validate email
+    const user = await User.findOne({email:req.body.email});
+    if(user){
+        return res.status(400).json('Email already exists');
+    }
+    //Hash pass
+    const salt= await bcrypt.genSalt(10);
+    const hashPass= await bcrypt.hash(req.body.password,salt);
+    //Save User
+    const newUser= new User({
+        email:req.body.email,
+        password:hashPass,
+        name:req.body.name
+    });
+    try{
+        await newUser.save();
+        res.status(200).json('User added!'+newUser.id);
+    }catch(err){
+        res.status(400).json(err);
+    }
 });
+
+router.post('/login', async (req, res)=>{
+    //Validate
+    const { error } = loginValidation(req.body);
+    if (error){
+        return res.status(400).json(error.details[0].message);
+    }
+    //Validate email
+    const user = await User.findOne({email:req.body.email});
+    if(!user){
+        return res.status(400).json('Email does not exists');
+    }
+    const validPass= await bcrypt.compare(req.body.password, user.password);
+    if(!validPass){
+        return res.status(400).json('Invalid password');
+    }
+    const token = jwt.sign({_id:user.id},process.env.TOKEN);
+    res.header('auth-token',token).send(token);
+});
+
 router.get('/:id', (req,res)=>{
     User.findById(req.params.id)
         .then((user)=>res.json(user))
@@ -65,25 +88,5 @@ router.delete('/:id',(req,res)=>{
         .then(()=>res.json('User deleted!'))
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
-
-function Logout(req, res){
-    if (req.session) {
-        req.session.destroy(function(err) {
-            if(err) {
-                return res.json({err});
-            } else {
-                return res.json({'logout': "Success"});
-            }
-        });
-    }
-}
-
-function requiresLogin(req, res, next) {
-    if (req.session && req.session.user) {
-        return next();
-    } else {
-        return res.json({err: 'You must be logged in to view this page.'});
-    }
-}
 
 module.exports=router;

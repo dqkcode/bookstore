@@ -23,6 +23,10 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required:true
       },
+      price:{
+        type:Number,
+        required:true
+      },
       author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -34,8 +38,7 @@ const bookSchema = new mongoose.Schema({
         ref: 'Publisher'
       },
       discount: {
-        type: String
-
+        type: Number
       }
 },
 {

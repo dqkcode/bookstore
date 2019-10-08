@@ -29,6 +29,7 @@ router.post('/add',upload.single('coverImage'),(req, res)=>{
         description: req.body.description,
         publishDate: new Date(req.body.publishDate),
         pageCount: req.body.pageCount,
+        price: req.body.price,
         coverImage: fileName,
         author: req.body.author,
         publisher: req.body.publisher,
@@ -51,7 +52,7 @@ router.post('/update/:id', upload.single('coverImage'),(req, res)=>{
         .then((book)=>{
             let bookImageName=book.coverImage;
             if(bookImageName!=null){
-                fs.unlink(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
+                fs.unlinkSync(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
                     if (err) throw err;
                     console.log(`successfully deleted cover image`);
             });
@@ -76,12 +77,13 @@ router.delete('/:id',(req,res)=>{
     .then(rbook => {
         let bookImageName=rbook.coverImage;
         if(bookImageName!=null){
-            fs.unlink(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
+            fs.unlinkSync(__dirname+`/../client/public/Images/bookCovers/${bookImageName}`, (err) => {
                 if (err) throw err;
                 console.log(`successfully deleted cover image`);
             });
         }        
     })
+    .catch((err)=>console.log(err));
     Book.findByIdAndDelete(req.params.id)
         .then(()=>res.json('Book deleted!'))
         .catch((err)=>res.status(400).json('Error: '+err ));

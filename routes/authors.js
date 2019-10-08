@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const verify = require('../config/verify');
 let Author= require('../models/author.model');
 
 router.get('/', (req,res)=>{
@@ -28,7 +29,7 @@ router.post('/update/:id',(req,res)=>{
         .then((author)=>{
             author.name=req.body.name;
             author.save()
-            .then(()=>res.json('Author updated!'))
+            .then(()=>res.json('Author updated! || '+ author.id))
             .catch((err)=>res.status(400).json('Error: '+err ));
         })
         .catch((err)=>res.status(400).json('Error: '+err ));
