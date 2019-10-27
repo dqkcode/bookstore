@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const config=require('config');
+import jwt from'jsonwebtoken';
+import config from 'config';
 function verify(req,res,next){
     const token =req.header('x-auth-token');
     if(!token){

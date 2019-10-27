@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const {check, validationResult} = require('express-validator');
-const config = require('config');
-const Publisher = require ('../models/publisher.model');
-// import {Publisher} from '../models/publisher.model';
+import express from "express";
+const router = express.Router();
+import {check, validationResult} from 'express-validator';
+import config from 'config';
+import Publisher from "../models/publisher.model";
 
 router.get('/', (req,res)=>{
     Publisher.find()

@@ -1,22 +1,22 @@
 "use strict";
 
-var express = require('express');
+import express from 'express';
 
-var cors = require('cors');
+import cors from 'cors';
 
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var session = require('express-session');
+import session from 'express-session';
 
-var config = require('config');
+import config from 'config';
 
-var authorRouter = require('./routes/authors');
+import authorRouter from './routes/authors';
 
-var bookRouter = require('./routes/books');
+import bookRouter from './routes/books';
 
-var publisherRouter = require('./routes/publishers');
+import publisherRouter from './routes/publishers';
 
-var userRouter = require('./routes/users');
+import userRouter from './routes/users';
 
 var app = express();
 var connection = mongoose.connection;
