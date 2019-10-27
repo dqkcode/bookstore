@@ -1,15 +1,16 @@
 const jwt = require('jsonwebtoken');
-
-module.exports=function(req,res,next){
-    const token =req.header('auth-token');
+const config=require('config');
+function verify(req,res,next){
+    const token =req.header('x-auth-token');
     if(!token){
-        return res.status(401).json('Access denied!');
+        return res.status(401).json('No token, Access denied!');
     }
     try{
-        const verified=jwt.verify(token, process.env.TOKEN);
-        req.user=verified;
+        const decoded=jwt.verify(token, config.get('TOKEN'));
+        req.user=decoded.user;
         next();
     }catch(err){
-        res.status(400).json(err);
+        res.status(401).json('Token is not valid');
     }
 }
+module.exports = verify;

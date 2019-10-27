@@ -1,5 +1,8 @@
 const router = require('express').Router();
-let Publisher= require('../models/publisher.model');
+const {check, validationResult} = require('express-validator');
+const config = require('config');
+const Publisher = require ('../models/publisher.model');
+// import {Publisher} from '../models/publisher.model';
 
 router.get('/', (req,res)=>{
     Publisher.find()
@@ -7,14 +10,28 @@ router.get('/', (req,res)=>{
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 
-router.post('/add',(req, res)=>{
-    const name = req.body.name;
-    const newPublisher= new Publisher({
-        name:name
-    });
-    newPublisher.save()
-        .then(()=>res.json('Publisher added! ||'+newPublisher.id))
-        .catch((err)=>res.status(400).json('Error: '+err ));
+router.post('/add',[
+    check('name', 'Name is required').not().isEmpty(),
+  ], async (req, res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const {name} = req.body;
+    try{
+        const newPublisher = new Publisher({
+            name
+        });
+        let publisher=await newPublisher.save();
+        res.json(publisher);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+    
+    newAuthor.save()
+        .then(() => res.json('Author added! || ' + newAuthor.id))
+        .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/:id', (req,res)=>{
@@ -23,21 +40,47 @@ router.get('/:id', (req,res)=>{
         .catch((err)=>res.status(400).json('Error: '+err ));
 });
 
-router.post('/update/:id',(req,res)=>{
-    Publisher.findById(req.params.id)
-        .then((publisher)=>{
-            publisher.name=req.body.name;
-            publisher.save()
-            .then(()=>res.json('Publisher updated!  ||'+publisher.id))
-            .catch((err)=>res.status(400).json('Error: '+err ));
-        })
-        .catch((err)=>res.status(400).json('Error: '+err ));
+router.post('/update/:id', [
+    check('name', 'Name is required').not().isEmpty()
+  ], async (req, res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const {name} = req.body;
+    try{
+        const publisher = Publisher.findById(req.params.id);
+        publisher.name=name;
+        let updatedAuthor = await publisher.save();
+        res.json(updatedAuthor);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+    
+    newAuthor.save()
+        .then(() => res.json('Author added! || ' + newAuthor.id))
+        .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.delete('/:id',(req,res)=>{
-    Publisher.findByIdAndDelete(req.params.id)
-        .then(()=>res.json('Publisher deleted!'))
-        .catch((err)=>res.status(400).json('Error: '+err ));
+router.delete('/:id', async (req, res) => {
+    try {
+        const publisher = await Publisher.findById(req.params.id);
+    
+        if (!publisher) {
+          return res.status(404).json({ msg: 'Author not found' });
+        }
+    
+        await publisher.remove();
+    
+        res.json({ msg: 'Author removed' });
+      } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') {
+          return res.status(404).json({ msg: 'Author not found' });
+        }
+        res.status(500).send('Server Error');
+      }
 });
 
 module.exports=router;
