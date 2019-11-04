@@ -52,5 +52,5 @@ bookSchema.virtual('coverImagePath').get(function() {
 })
 
 const Book = mongoose.model('Book', bookSchema);
-module.exports={Book};
+module.exports= Book;
 module.exports.coverImageBasePath = coverImageBasePath

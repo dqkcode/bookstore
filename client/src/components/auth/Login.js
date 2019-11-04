@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
@@ -22,7 +22,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/' />;
   }
 
   return (
@@ -60,9 +60,9 @@ const Login = ({ login, isAuthenticated }) => {
             Log in
         </Button>
       </Form>
-      {/* <p className='my-1'>
+      <p className='my-1'>
         Don't have an account? <Link to='/register'>Sign Up</Link>
-      </p> */}
+      </p>
     </Fragment>
   );
 };

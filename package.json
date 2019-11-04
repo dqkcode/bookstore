@@ -6,7 +6,6 @@
   "scripts": {
     "server": "nodemon --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
     "client": "npm start --prefix client",
     "both": "concurrently \"npm run server\" \"npm run client\""
   },

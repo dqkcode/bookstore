@@ -14,6 +14,7 @@ export const GET_REPOS = 'GET_REPOS';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
+
 export const GET_AUTHORS = 'GET_AUTHORS';
 export const GET_AUTHORS_SUCCEEDED = 'GET_AUTHORS_SUCCEEDED';
 export const GET_AUTHORS_FAILED = 'GET_AUTHORS_FAILED';
@@ -27,11 +28,25 @@ export const UPDATE_AUTHOR = 'UPDATE_AUTHOR';
 export const DELETE_AUTHOR = 'DELETE_AUTHOR';
 export const DELETE_AUTHOR_SUCCEEDED = 'DELETE_AUTHOR_SUCCEEDED';
 export const DELETE_AUTHOR_FAILED = 'DELETE_AUTHOR_FAILED';
-
 export const AUTHOR_ERROR = 'AUTHOR_ERROR';
+
 export const GET_PUBLISHERS = 'GET_PUBLISHERS';
+export const GET_PUBLISHER = 'GET_PUBLISHER';
 export const ADD_PUBLISHER = 'ADD_PUBLISHER';
+export const UPDATE_PUBLISHER = 'UPDATE_PUBLISHER';
 export const DELETE_PUBLISHER = 'DELETE_PUBLISHER';
 export const PUBLISHER_ERROR = 'PUBLISHER_ERROR';
+
 export const GET_BOOKS = 'GET_BOOKS';
+export const GET_BOOK = 'GET_BOOK';
+export const ADD_BOOK = 'ADD_BOOK';
+export const UPDATE_BOOK = 'UPDATE_BOOK';
+export const DELETE_BOOK = 'DELETE_BOOK';
 export const BOOK_ERROR = 'BOOK_ERROR';
+
+export const GET_USERS = 'GET_USERS';
+export const GET_USER = 'GET_USER';
+export const ADD_USER = 'ADD_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const USER_ERROR = 'USER_ERROR';

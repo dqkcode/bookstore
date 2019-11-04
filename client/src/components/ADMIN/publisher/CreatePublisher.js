@@ -2,10 +2,10 @@ import React, {Fragment, useState } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {addAuthor} from '../../actions/authors' ;
+import {addPublisher} from '../../../actions/publishers' ;
 import { Form, Input, Button } from 'antd';
 
-const CreateAuthor = ({addAuthor, history}) => {
+const CreatePublisher = ({addPublisher, history}) => {
     const [formData, setFormData]= useState({
         name:''
     })
@@ -16,12 +16,12 @@ const CreateAuthor = ({addAuthor, history}) => {
 
     const onSubmit = async e => {
         e.preventDefault();
-        addAuthor(name, history);
+        addPublisher(formData, history);
     }
 
     return (
         <Fragment>
-            <h1 className='large text-primary'>Create Author</h1>
+            <h1 className='large text-primary'>Create Publisher</h1>
             <Form className='form' onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
                     <Input
@@ -33,7 +33,7 @@ const CreateAuthor = ({addAuthor, history}) => {
                     required
                     />
                 </div>
-                <Link to='/authors'>  
+                <Link to='/publishers'>  
                     <Button type="danger" >
                         Back
                     </Button> 
@@ -46,8 +46,8 @@ const CreateAuthor = ({addAuthor, history}) => {
     )
 }
 
-CreateAuthor.propTypes = {
-    addAuthor:PropTypes.func.isRequired,
+CreatePublisher.propTypes = {
+    addPublisher:PropTypes.func.isRequired,
 }
 
-export default connect(null, {addAuthor})(withRouter(CreateAuthor));
+export default connect(null, {addPublisher})(withRouter(CreatePublisher));

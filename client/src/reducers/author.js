@@ -1,4 +1,4 @@
-import {GET_AUTHOR, GET_AUTHORS_SUCCEEDED, GET_AUTHORS_FAILED,  
+import {GET_AUTHORS, GET_AUTHOR, GET_AUTHORS_SUCCEEDED, GET_AUTHORS_FAILED,  
     ADD_AUTHORS_SUCCEEDED, ADD_AUTHORS_FAILED,
     AUTHOR_ERROR, DELETE_AUTHOR,  UPDATE_AUTHOR} from '../actions/types';
 
@@ -13,12 +13,12 @@ export default function(state=initialState, action){
     const {type,payload}=action;
 
     switch(type){
-        // case GET_AUTHORS:
-        //     return{
-        //         ...state,
-        //         authors:payload,
-        //         loading:false
-        //     };
+        case GET_AUTHORS:
+            return{
+                ...state,
+                authors:payload,
+                loading:false
+            };
         case GET_AUTHORS_SUCCEEDED:
             return{
                 ...state,

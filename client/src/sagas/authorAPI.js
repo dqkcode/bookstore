@@ -8,7 +8,6 @@ function* getAuthorsAPI() {
         }
     };
     const response = yield axios.get('/authors/', config);
-    console.log('response at getAuthor:' + response.data);
     const authors = yield response.status === 200 ? response.data : [];
     return authors;
 }

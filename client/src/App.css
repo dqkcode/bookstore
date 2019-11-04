@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+
 /* Global Styles */
 :root {
   --primary-color: #17a2b8;
@@ -34,6 +35,7 @@ ul {
 img {
   width: 100%;
 }
+
 
 /* Utilities */
 .container {
@@ -79,24 +81,31 @@ img {
 .p {
   padding: 0.5rem;
 }
+
 .p-1 {
   padding: 1rem;
 }
+
 .p-2 {
   padding: 2rem;
 }
+
 .p-3 {
   padding: 3rem;
 }
+
 .py {
   padding: 0.5rem 0;
 }
+
 .py-1 {
   padding: 1rem 0;
 }
+
 .py-2 {
   padding: 2rem 0;
 }
+
 .py-3 {
   padding: 3rem 0;
 }
@@ -105,24 +114,31 @@ img {
 .m {
   margin: 0.5rem;
 }
+
 .m-1 {
   margin: 1rem;
 }
+
 .m-2 {
   margin: 2rem;
 }
+
 .m-3 {
   margin: 3rem;
 }
+
 .my {
   margin: 0.5rem 0;
 }
+
 .my-1 {
   margin: 1rem 0;
 }
+
 .my-2 {
   margin: 2rem 0;
 }
+
 .my-3 {
   margin: 3rem 0;
 }
@@ -276,15 +292,19 @@ button {
 .form .social-input i.fa-twitter {
   color: #38a1f3;
 }
+
 .form .social-input i.fa-facebook {
   color: #3b5998;
 }
+
 .form .social-input i.fa-instagram {
   color: #3f729b;
 }
+
 .form .social-input i.fa-youtube {
   color: #c4302b;
 }
+
 .form .social-input i.fa-linkedin {
   color: #0077b5;
 }
@@ -335,6 +355,7 @@ button {
 .landing {
   position: relative;
   height: 100vh;
+  background: url('./showcase.jpg') no-repeat center center/cover;
 }
 
 .landing-inner {
@@ -418,15 +439,15 @@ button {
   margin-bottom: 1rem;
 }
 
-.profile-exp > div,
-.profile-edu > div {
+.profile-exp>div,
+.profile-edu>div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
 
-.profile-exp > div:last-child,
-.profile-edu > div:last-child {
+.profile-exp>div:last-child,
+.profile-edu>div:last-child {
   border: 0;
 }
 
@@ -443,12 +464,12 @@ button {
   display: flex;
 }
 
-.profile-github .repo > div:first-child {
+.profile-github .repo>div:first-child {
   flex: 7;
   flex-basis: 70%;
 }
 
-.profile-github > div:last-child {
+.profile-github>div:last-child {
   flex: 3;
   flex-basis: 20%;
 }
@@ -466,7 +487,7 @@ button {
   align-items: center;
 }
 
-.post > div:first-child {
+.post>div:first-child {
   text-align: center;
 }
 
@@ -570,8 +591,482 @@ button {
   .post {
     grid-template-columns: 1fr;
   }
+
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
   }
+}
+
+/* Koparion */
+
+.product-wrapper {
+  margin-bottom: 20px;
+  width: 20%;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+
+.product-img,
+.most-product-img {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img::after,
+.most-product-img::after,
+.banner-img-3::after {
+  background: rgba(255, 255, 255, 0.61) none repeat scroll 0 0;
+  content: "";
+  display: block;
+  height: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s ease-in-out 0s;
+  width: 100%;
+  pointer-events: none;
+}
+
+.product-wrapper:hover .product-img::after,
+.single-most-product:hover .most-product-img::after,
+.single-deal:hover .banner-img-3::after {
+  height: 100%;
+  opacity: 1;
+}
+
+.product-img a img {
+  width: 100%;
+}
+
+.quick-view {
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  transition: all .5s ease 0s;
+  opacity: 0;
+}
+
+.product-wrapper:hover .quick-view {
+  opacity: 1;
+}
+
+.quick-view a {
+  background-color: #f07c29;
+  border-radius: 50px;
+  color: #fff;
+  display: inline-block;
+  font-size: 22px;
+  height: 61px;
+  line-height: 61px;
+  width: 61px;
+  transform: scale(0);
+  transition: all .5s ease 0s;
+}
+
+.product-wrapper:hover .quick-view a {
+  transform: scale(1);
+}
+
+.product-rating ul li {
+  display: inline-block;
+}
+
+.product-rating ul li a {
+  color: #f07c29;
+  font-size: 12px;
+}
+
+.product-details h4 {
+  margin-bottom: 10px;
+  margin-top: 13px;
+}
+
+.product-details h4 a {
+  color: #333333;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow: hidden;
+  padding: 0;
+  text-transform: capitalize;
+  transition: .3s;
+  font-family: 'Rufina', serif;
+}
+
+.product-details h4 a:hover,
+.product-link .product-button a:hover,
+.product-link .add-to-link ul li a:hover {
+  color: #f07c29;
+}
+
+.product-price ul li {
+  display: inline-block;
+  color: #f07c29;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Rufina', serif;
+  font-style: italic;
+}
+
+.product-price ul li span {
+  color: #666;
+  padding-right: 5px;
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.product-price ul li.old-price {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 5px;
+  text-decoration: line-through;
+}
+
+.product-wrapper:hover .product-price {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.product-price {
+  transition: all 0.5s ease 0s;
+}
+
+.product-link {
+  bottom: 0px;
+  left: 0;
+  overflow: hidden;
+  padding-bottom: 8px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: .5s;
+  margin-bottom: 1px;
+}
+
+.product-link:after {
+  background: #cccccc none repeat scroll 0 0;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: 50%;
+  opacity: 1;
+  position: absolute;
+  transition: .5s;
+  width: 0;
+  right: 50%;
+}
+
+.product-wrapper:hover .product-link:after {
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.product-wrapper:hover .product-link {
+  opacity: 1;
+  visibility: visible;
+}
+
+.product-link .product-button {
+  display: inline-block;
+  float: left;
+  position: relative;
+  transition: .5s;
+  transform: scale(0.6);
+  z-index: 2;
+}
+
+.product-link .product-button a {
+  border-radius: 0;
+  color: #333;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 30px;
+  text-transform: capitalize;
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+  transition: .3s;
+}
+
+.product-link .product-button a i {
+  padding-right: 8px;
+}
+
+.product-link .add-to-link {
+  display: inline-block;
+  float: right;
+  position: relative;
+  transition: .5s;
+  transform: scale(0.6);
+  z-index: 3;
+}
+
+.product-link .add-to-link ul li {
+  display: inline-block;
+}
+
+.product-link .add-to-link ul li a {
+  display: inline-block;
+  color: #333;
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  width: 30px;
+  transition: .3s;
+  text-align: center;
+}
+
+.product-wrapper:hover .product-link .product-button {
+  transform: scale(1);
+}
+
+.product-wrapper:hover .product-link .add-to-link {
+  transform: scale(1);
+}
+
+.product-flag {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.product-flag li {
+  line-height: 16px;
+}
+
+.product-flag ul li>span {
+  background: #f07c29 none repeat scroll 0 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0 6px;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 100;
+  font-weight: 400;
+  position: relative;
+  font-family: "Open Sans", sans-serif;
+}
+
+.product-flag ul li>span.discount-percentage {
+  background: #eeb900 none repeat scroll 0 0;
+  line-height: 1;
+}
+
+.product-flag ul li>span:before {
+  border-color: #f07c29 transparent transparent #f07c29;
+  border-style: solid;
+  border-width: 4.5px 3px;
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 0;
+}
+
+.product-flag ul li>span:after {
+  border-color: transparent transparent #f07c29 #f07c29;
+  border-style: solid;
+  border-width: 4.5px 3px;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  right: -6px;
+}
+
+.product-flag ul li>span.discount-percentage:before {
+  border-color: #eeb900 transparent transparent #eeb900;
+}
+
+.product-flag ul li>span.discount-percentage:after {
+  border-color: transparent transparent #eeb900 #eeb900;
+}
+
+.tab-content>.tab-pane {
+  display: block;
+  overflow: hidden;
+  height: 0;
+}
+
+.tab-content>.active {
+  display: block;
+  overflow: visible;
+  height: auto;
+}
+
+.product-details-large {
+  width: 35%;
+
+  float: left;
+  margin: 20px;
+}
+
+.product-detail-price span {
+  display: inline-block;
+  color: #f07c29;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Rufina', serif;
+  font-style: italic;
+}
+
+.toolbar {
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.shop-tab {
+  float: left;
+  display: inline-block;
+}
+
+.tab-3 {
+  float: left;
+  display: inline-block;
+}
+
+.tab-3 ul li {
+  display: inline-block;
+  margin-right: 15px;
+  position: relative;
+}
+
+.tab-3 ul li::before {
+  background: #ccc none repeat scroll 0 0;
+  content: "";
+  height: 80px;
+  position: absolute;
+  right: -7px;
+  width: 1px;
+  top: 0;
+}
+
+.tab-3 ul li:last-child::before {
+  display: none;
+}
+
+.tab-3 ul li a {
+  color: #666;
+  display: inline-block;
+  font-size: 15px;
+  height: 0;
+  line-height: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+
+.tab-3 ul li a i {
+  font-size: 30px;
+  padding-right: 8px;
+  position: relative;
+  top: 6px;
+}
+
+.tab-3 ul li.active a,
+.tab-3 ul li a:hover {
+  color: #F07C29;
+}
+
+.product-info-main .page-title h1 {
+  color: #333333;
+  font-size: 36px;
+  font-weight: 400;
+  margin: 15px 0 9px;
+  padding: 0;
+  text-transform: capitalize;
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+}
+
+.product-info-stock-sku>span {
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 15px;
+  text-transform: capitalize;
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+  float: left;
+  display: inline-block;
+}
+
+.product-attribute span {
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+  padding-right: 10px;
+  text-transform: uppercase;
+}
+
+.product-attribute span.value {
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+}
+
+.product-reviews-summary {
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  display: block;
+  margin: 20px 0 0;
+  padding: 14px 0 12px;
+  overflow: hidden;
+}
+
+.rating-summary {
+  display: inline-block;
+  float: left;
+}
+
+.rating-summary>a {
+  color: #F07C29;
+}
+
+.reviews-actions a.view {
+  border-left: 1px solid #989898;
+  color: #333;
+  padding-left: 6px;
+}
+
+.reviews-actions a {
+  color: #333;
+}
+
+.reviews-actions {
+  float: left;
+  margin-left: 10px;
+}
+
+.product-info-price {
+  margin: 26px 0;
+  overflow: hidden;
+}
+
+.product-info-price .price-final {
+  color: #f07c29;
+  font-size: 25px;
+  font-weight: 400;
+  font-family: 'Rufina', serif;
+  font-weight: 400;
+}
+
+.product-info-price .price-final span.old-price {
+  margin-left: 5px;
+  color: #909090;
+  font-weight: 400;
+  text-decoration: line-through;
 }

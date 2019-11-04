@@ -2,8 +2,8 @@ import React, {Fragment, useState, useEffect } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {editAuthor, getCurrentAuthor} from '../../actions/authors' ;
-import Spinner from '../layout/Spinner';
+import {editAuthor, getCurrentAuthor} from '../../../actions/authors' ;
+import Spinner from '../../layout/Spinner';
 import { Form, Input, Button } from 'antd';
 
 const EditAuthor = ({editAuthor, getCurrentAuthor, author:{author, loading}, match, history}) => {
