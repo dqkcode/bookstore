@@ -10,9 +10,9 @@ Table of Contents
 
 module.exports = {
   /* 01.General */
-  "general.copyright": "Gogo React © Todos los derechos reservados.",
+  "general.copyright": "BookShop © Book store in DALAT.",
 
-  /* 02.Inicio de sesión de usuario, cierre de sesión, registro */
+  /* 02.User Login, Logout, Register */
   "user.login-title": "Iniciar sesión",
   "user.register": "Registro",
   "user.forgot-password": "Se te olvidó tu contraseña",
