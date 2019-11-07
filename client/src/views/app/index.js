@@ -10,6 +10,9 @@ const Gogo = React.lazy(() =>
 const SecondMenu = React.lazy(() =>
   import(/* webpackChunkName: "viwes-second-menu" */ './second-menu')
 );
+const Users = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-second-menu" */ './users')
+);
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "viwes-blank-page" */ './blank-page')
 );
@@ -29,8 +32,8 @@ class App extends Component {
                 render={props => <Gogo {...props} />}
               />
               <Route
-                path={`${match.url}/second-menu`}
-                render={props => <SecondMenu {...props} />}
+                path={`${match.url}/users`}
+                render={props => <Users {...props} />}
               />
               <Route
                 path={`${match.url}/blank-page`}

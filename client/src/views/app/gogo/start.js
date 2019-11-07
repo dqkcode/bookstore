@@ -12,6 +12,7 @@ export default class Start extends Component {
               <Colxx xxs="12">
                 <Breadcrumb heading="menu.start" match={this.props.match} />
                 <Separator className="mb-5" />
+                
               </Colxx>
             </Row>
             <Row>

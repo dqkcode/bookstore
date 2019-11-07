@@ -11,24 +11,24 @@ Table of Contents
 
 module.exports = {
   /* 01.General */
-  "general.copyright": "Gogo React © 2018 All Rights Reserved.",
+  "general.copyright": "BookStore © 2019 All Rights Reserved.",
 
   /* 02.User Login, Logout, Register */
-  "user.login-title": "Login",
-  "user.register": "Register",
-  "user.forgot-password": "Forgot Password",
+  "user.login-title": "Đăng nhập",
+  "user.register": "Đăng kí",
+  "user.forgot-password": "Quên mật khẩu",
   "user.email": "E-mail",
   "user.password": "Password",
-  "user.forgot-password-question": "Forget password?",
-  "user.fullname": "Full Name",
-  "user.login-button": "LOGIN",
-  "user.register-button": "REGISTER",
+  "user.forgot-password-question": "Quên mật khẩu?",
+  "user.fullname": "Họ và tên",
+  "user.login-button": "ĐĂNG NHẬP",
+  "user.register-button": "ĐĂNG KÍ",
   "user.reset-password-button": "RESET",
-  "user.buy": "BUY",
-  "user.username": "Username",
+  "user.buy": "MUA",
+  "user.username": "Tên người dùng",
 
   /* 03.Menu */
-  "menu.app": "Home",
+  "menu.app": "Trang chủ",
   "menu.dashboards": "Dashboards",
   "menu.gogo": "Gogo",
   "menu.start": "Start",
@@ -42,22 +42,10 @@ module.exports = {
   "menu.search" :"Search",
   "menu.docs": "Docs",
   "menu.blank-page": "Blank Page",
-  "menu.users": "Users",
+  "menu.manage": "Quản Lý",
 
  /* 04.Error Page */
  "pages.error-title": "Ooops... looks like an error occurred!",
  "pages.error-code": "Error code",
  "pages.go-back-home": "GO BACK HOME",
- 
- /* 05. Table */
-"table.users":"User List",
-/* 06. pages */
-"pages.add-new-user-title":"Add new user",
-"pages.user-first-name":"First Name",
-"pages.user-last-name":"Last Name",
-"pages.user-email":"Email",
-"pages.user-role":"Role",
-"pages.cancel":"Cancel",
-"pages.submit":"Submit",
 };
-
